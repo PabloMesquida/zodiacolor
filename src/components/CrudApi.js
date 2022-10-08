@@ -12,7 +12,7 @@ const CrudApi = () => {
   const [loading, setLoading] = useState(false);
 
   let api = helpHttp();
-  let url = "https://zodiacolor-server.vercel.app/santos/";
+  let url = "https://zodiacolor-server.vercel.app/santos";
 
   useEffect(() => {
     setLoading(true);
