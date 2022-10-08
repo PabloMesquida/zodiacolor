@@ -4,8 +4,8 @@ export const helpHttp = () => {
       accept: "application/json",
     };
 
-    const controller = new AbortController();
-    options.signal = controller.signal;
+    //const controller = new AbortController();
+    //options.signal = controller.signal;
 
     options.method = options.method || "GET";
     options.headers = options.headers
@@ -17,7 +17,7 @@ export const helpHttp = () => {
 
     console.log(options);
 
-    setTimeout(() => controller.abort(), 5000);
+    //  setTimeout(() => controller.abort(), 5000);
 
     return fetch(endpoint, options)
       .then((res) =>
