@@ -33,12 +33,12 @@ const CrudApi = () => {
 
   const createData = (data) => {
     data.id = Date.now();
-
+    console.log("data: ", data);
     let options = {
       body: data,
       headers: { "Content-Type": "application/json" },
     };
-
+    console.log(url, options);
     api.post(url, options).then((res) => {
       console.log(res);
       if (!res.err) {
@@ -48,9 +48,10 @@ const CrudApi = () => {
       }
     });
   };
+
   const updateData = (data) => {
     let endpoint = `${url}/${data.id}`;
-    // console.log(endpoint);
+    console.log(endpoint);
 
     let options = {
       body: data,
