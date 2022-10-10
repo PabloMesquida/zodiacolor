@@ -8,6 +8,8 @@ export const helpHttp = () => {
     options.signal = controller.signal;
 
     options.method = options.method || "GET";
+    options.mode = "cors";
+    options.cache = "reload";
     options.headers = options.headers
       ? { ...defaultHeader, ...options.headers }
       : defaultHeader;

@@ -12,9 +12,10 @@ const CrudApi = () => {
   const [loading, setLoading] = useState(false);
 
   let api = helpHttp();
-  let url = "https://zodiacolor-server.vercel.app/santos";
+  let url = "https://zodiacolor-server.onrender.com/users";
 
   useEffect(() => {
+    console.log(url);
     setLoading(true);
     helpHttp()
       .get(url)
@@ -36,7 +37,9 @@ const CrudApi = () => {
     console.log("data: ", data);
     let options = {
       body: data,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
     console.log(url, options);
     api.post(url, options).then((res) => {
@@ -94,7 +97,7 @@ const CrudApi = () => {
 
   return (
     <div>
-      <h2>CRUD API</h2>
+      <h1>zodiacolor</h1>
       <article className="grid-1-2">
         <CrudForm
           createData={createData}
