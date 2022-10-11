@@ -97,7 +97,6 @@ const CrudApi = () => {
 
   return (
     <div>
-      <h1>zodiacolor</h1>
       <article className="grid-1-2">
         <CrudForm
           createData={createData}
