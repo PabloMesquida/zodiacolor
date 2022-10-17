@@ -4,6 +4,7 @@ import CrudForm from "./CrudForm";
 import CrudTable from "./CrudTable";
 import Loader from "./Loader";
 import Message from "./Message";
+import { SectionContainer } from "./CrudApi.styles.js";
 
 const CrudApi = () => {
   const [db, setDb] = useState(null);
@@ -96,31 +97,28 @@ const CrudApi = () => {
   };
 
   return (
-    <div>
-      <article className="grid-1-2">
-        <CrudForm
-          createData={createData}
-          updateData={updateData}
-          dataToEdit={dataToEdit}
-          setDataToEdit={setDataToEdit}
+    <SectionContainer>
+      <CrudForm
+        createData={createData}
+        updateData={updateData}
+        dataToEdit={dataToEdit}
+        setDataToEdit={setDataToEdit}
+      />
+      {loading && <Loader />}
+      {error && (
+        <Message
+          msg={`Error ${error.status}: ${error.statusText}`}
+          bgColor="#dc3545"
         />
-        {loading && <Loader />}
-        {error && (
-          <Message
-            msg={`Error ${error.status}: ${error.statusText}`}
-            bgColor="#dc3545"
-          />
-        )}
-        {db && (
-          <CrudTable
-            data={db}
-            setDataToEdit={setDataToEdit}
-            deleteData={deleteData}
-          />
-        )}
-      </article>
-      <hr />
-    </div>
+      )}
+      {db && (
+        <CrudTable
+          data={db}
+          setDataToEdit={setDataToEdit}
+          deleteData={deleteData}
+        />
+      )}
+    </SectionContainer>
   );
 };
 

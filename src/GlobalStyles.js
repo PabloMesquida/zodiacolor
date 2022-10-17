@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+let vh = window.innerHeight;
+
 export const GlobalStyle = createGlobalStyle`
 html {
   box-sizing: border-box;
@@ -18,16 +20,17 @@ html {
 }
 body{
   width:100%;
-  height:100vh;
+   height: ${vh}px;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
+  background-color: ${({ theme }) => theme.colorTwo};
 
 }
 
 h1{
+  margin: 1rem 2rem;
   font-family: 'Fredoka One', cursive;
   font-size: 3rem;
   letter-spacing: 2px;
@@ -40,8 +43,9 @@ h1{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 	animation: gradient 15s ease infinite;
-  border-bottom: 1px solid #333;
-  margin-bottom: 2rem;
+  
+  //border-bottom: 1px solid #333;
+ // margin-bottom: 2rem;
 }
 
 @keyframes gradient {
