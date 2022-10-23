@@ -1,43 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useSpring, animated } from "@react-spring/web";
+import { useDrag } from "@use-gesture/react";
 
-const initialForm = { name: "", constellation: "", id: null };
+const initialForm = { name: "", sun: "", ascendant: "", moon: "", id: null };
 
-const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
+const CrudForm = ({ createData }) => {
   const [form, setForm] = useState(initialForm);
-  useEffect(() => {
-    if (dataToEdit) {
-      setForm(dataToEdit);
-    } else {
-      setForm(initialForm);
-    }
-  }, [dataToEdit]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.constellation) {
+    if (!form.name || !form.sun || !form.ascendant || !form.moon) {
       alert("Datos incompletos");
       return;
     }
 
     if (form.id === null) {
       createData(form);
-    } else {
-      updateData(form);
     }
     handleReset();
   };
 
   const handleReset = (e) => {
     setForm(initialForm);
-    setDataToEdit(null);
   };
 
   return (
-    <div>
-      <h3>{dataToEdit ? "Editar" : "Agregar"}</h3>
+    <>
+      <h3>"Agregar"</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -46,17 +38,13 @@ const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
           onChange={handleChange}
           value={form.name}
         />
-        <input
-          type="text"
-          name="constellation"
-          placeholder="Constelación"
-          onChange={handleChange}
-          value={form.constellation}
-        />
+        <input name="sun" type="hidden" value={form.sun} />
+        <input name="ascendant" type="hidden" value={form.ascendant} />
+        <input name="moon" type="hidden" value={form.moon} />
         <input type="submit" value="Enviar" />
         <input type="reset" value="Limpiar" onClick={handleReset} />
       </form>
-    </div>
+    </>
   );
 };
 
