@@ -29,7 +29,7 @@ const CrudForm = ({ createData }) => {
 
   return (
     <>
-      <h3>"Agregar"</h3>
+      <h3>Agregar</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

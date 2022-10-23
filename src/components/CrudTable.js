@@ -2,15 +2,17 @@ import React from "react";
 import CrudTableRow from "./CrudTableRow";
 
 const CrudTable = ({ data, setDataToEdit, deleteData }) => {
+  console.log(data.length);
   return (
     <div>
       <h3>Tabla de datos</h3>
       <table>
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Constelación</th>
-            <th>Acciones</th>
+            <th>Name</th>
+            <th>Sun</th>
+            <th>Ascendant</th>
+            <th>Moon</th>
           </tr>
         </thead>
         <tbody>

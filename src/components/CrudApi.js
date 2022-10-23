@@ -12,7 +12,7 @@ const CrudApi = () => {
   const [loading, setLoading] = useState(false);
 
   let api = helpHttp();
-  let url = "https://zodiacolor-server.onrender.com/";
+  let url = "https://zodiacolor-server.onrender.com/users";
 
   useEffect(() => {
     setLoading(true);
@@ -46,6 +46,8 @@ const CrudApi = () => {
         setError(res);
       }
     });
+
+    console.log(db);
   };
 
   return (
