@@ -49,7 +49,12 @@ const CrudForm = ({ createData, signs }) => {
       <div>
         {signs && signs.length > 0 ? (
           signs.map((el) => (
-            <ImgSign src={`signs/${el.img}`} key={el.id} alt={el.name} />
+            <ImgSign
+              src={`signs/${el.img}`}
+              key={el.id}
+              alt={el.name}
+              color={el.color}
+            />
           ))
         ) : (
           <p>Sin datos</p>
