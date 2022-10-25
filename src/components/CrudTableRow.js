@@ -1,8 +1,8 @@
 import React from "react";
 
 const CrudTableRow = ({ el }) => {
-  console.log(el);
-  let { name, sun, ascendant, moon, id } = el;
+  // console.log(el);
+  let { name, sun, ascendant, moon } = el;
   return (
     <tr>
       <td>{name}</td>

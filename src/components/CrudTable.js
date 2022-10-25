@@ -2,7 +2,7 @@ import React from "react";
 import CrudTableRow from "./CrudTableRow";
 
 const CrudTable = ({ data, setDataToEdit, deleteData }) => {
-  console.log(data.length);
+  // console.log(data.length);
   return (
     <div>
       <h3>Tabla de datos</h3>

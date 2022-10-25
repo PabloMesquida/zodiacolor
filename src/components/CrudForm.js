@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
+import { ImgSign } from "./CrudForm.styles.js";
 
 const initialForm = { name: "", sun: "", ascendant: "", moon: "", id: null };
 
-const CrudForm = ({ createData }) => {
+const CrudForm = ({ createData, signs }) => {
   const [form, setForm] = useState(initialForm);
+
+  console.log(signs);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,7 +32,6 @@ const CrudForm = ({ createData }) => {
 
   return (
     <>
-      <h3>Agregar</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -44,6 +46,13 @@ const CrudForm = ({ createData }) => {
         <input type="submit" value="Enviar" />
         <input type="reset" value="Limpiar" onClick={handleReset} />
       </form>
+      <div>
+        {signs && signs.length > 0 ? (
+          signs.map((el) => <ImgSign img={el.img} key={el.id} alt={el.name} />)
+        ) : (
+          <p>Sin datos</p>
+        )}
+      </div>
     </>
   );
 };
