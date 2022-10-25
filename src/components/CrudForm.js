@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
-import { ImgSign } from "./CrudForm.styles.js";
+import { ImgSign, SignContainer } from "./CrudForm.styles.js";
 
 const initialForm = { name: "", sun: "", ascendant: "", moon: "", id: null };
 
@@ -46,11 +46,11 @@ const CrudForm = ({ createData, signs }) => {
         <input type="submit" value="Enviar" />
         <input type="reset" value="Limpiar" onClick={handleReset} />
       </form>
-      <div>
+      <SignContainer>
         {signs && signs.length > 0 ? (
           signs.map((el) => (
             <ImgSign
-              img={`signs/${el.img}`}
+              img={`signs/imgs/${el.img}`}
               key={el.id}
               alt={el.name}
               color={el.color}
@@ -59,7 +59,7 @@ const CrudForm = ({ createData, signs }) => {
         ) : (
           <p>Sin datos</p>
         )}
-      </div>
+      </SignContainer>
     </>
   );
 };

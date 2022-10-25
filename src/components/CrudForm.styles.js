@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
 export const ImgSign = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 62px;
+  height: 62px;
   background-image: url(${(props) => props.img});
   background-size: cover;
   background-position: center;
-  background-color: ${({ theme }) => theme.colorFour};
+`;
+
+export const SignContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
