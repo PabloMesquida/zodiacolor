@@ -50,7 +50,7 @@ const CrudForm = ({ createData, signs }) => {
         {signs && signs.length > 0 ? (
           signs.map((el) => (
             <ImgSign
-              src={`signs/${el.img}`}
+              img={`signs/${el.img}`}
               key={el.id}
               alt={el.name}
               color={el.color}
