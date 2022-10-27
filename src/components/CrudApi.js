@@ -2,19 +2,16 @@ import React, { useState, useEffect } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import CrudForm from "./CrudForm";
 import CrudTable from "./CrudTable";
-import Loader from "./Loader";
 import Message from "./Message";
 import { SectionContainer } from "./CrudApi.styles.js";
 
 const CrudApi = () => {
   const [db, setDb] = useState(null);
-  const [dbSigns, setDbSigns] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   let api = helpHttp();
   let url = "https://zodiacolor-server.onrender.com/users";
-  let urlSigns = "https://zodiacolor-server.onrender.com/signs";
 
   useEffect(() => {
     setLoading(true);
@@ -29,19 +26,6 @@ const CrudApi = () => {
           setError(res);
         }
       });
-
-    helpHttp()
-      .get(urlSigns)
-      .then((res) => {
-        if (!res.err) {
-          setDbSigns(res);
-          setError(null);
-        } else {
-          setDbSigns(null);
-          setError(res);
-        }
-      });
-    console.log(dbSigns);
     setLoading(false);
   }, [url]);
 
@@ -65,7 +49,7 @@ const CrudApi = () => {
 
   return (
     <SectionContainer>
-      <CrudForm createData={createData} signs={dbSigns} />
+      <CrudForm createData={createData} />
       {loading && <div>Loading.</div>}
       {error && (
         <Message

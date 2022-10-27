@@ -1,0 +1,76 @@
+{
+  "signs": [
+    {
+      "id": 1,
+      "name": "Aries",
+      "img": "aries.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 2,
+      "name": "Taurus",
+      "img": "taurus.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 3,
+      "name": "Gemini",
+      "img": "gemini.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 4,
+      "name": "Cancer",
+      "img": "cancer.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 5,
+      "name": "Leo",
+      "img": "leo.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 6,
+      "name": "Virgo",
+      "img": "virgo.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 7,
+      "name": "Libra",
+      "img": "libra.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 8,
+      "name": "Scorpio",
+      "img": "scorpio.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 9,
+      "name": "Sagittarius",
+      "img": "sagittarius.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 10,
+      "name": "Capricorn",
+      "img": "capricorn.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 11,
+      "name": "Aquarius",
+      "img": "aquarius.png",
+      "color": "#FF0000"
+    },
+    {
+      "id": 12,
+      "name": "Pisces",
+      "img": "pisces.png",
+      "color": "#FF0000"
+    }
+  ]
+}
