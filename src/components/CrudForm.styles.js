@@ -60,19 +60,45 @@ export const InputName = styled.input`
 `;
 
 export const TargetDiv = styled.div`
+  width: 68px;
+  height: 68px;
+  background-color: ${({ attached }) => (attached ? "white" : "#54BAB9")};
+
+  border-radius: 50px;
+`;
+
+export const TargetDivRef = styled.div`
   z-index: 5;
   width: 68px;
   height: 68px;
-  background-color: ${({ theme }) => theme.colorFour};
   border-radius: 50px;
 `;
 
 export const TargetCont = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 70px;
+
   @media (min-width: 640px) {
     width: 30%;
     min-width: 250px;
   }
+`;
+
+export const TargetDesign = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+`;
+
+export const TargetRef = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
 `;

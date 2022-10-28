@@ -7,9 +7,12 @@ import {
   ImgSign,
   SignContainer,
   TargetDiv,
+  TargetDivRef,
   TargetCont,
   FormSection,
   InputName,
+  TargetDesign,
+  TargetRef,
 } from "./CrudForm.styles.js";
 import data from "../helpers/signs.json";
 const IS_MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -38,16 +41,7 @@ const CrudForm = ({ createData }) => {
       movement: [mx, my],
     }) => {
       setDragging(active);
-      // console.log(pointer.capure);
-      // setAttached(document.setPointerCapture(x, y) === targetRefSun.current);
-      // setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
-      // !IS_MOBILE && this.setPointerCapture(targetRefSun.current);
-      if (IS_MOBILE) {
-        setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
-      } else {
-        setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
-      }
-
+      setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
       if (last) {
         api.start((index) => {
           if (index !== originalIndex) return;
@@ -103,9 +97,16 @@ const CrudForm = ({ createData }) => {
             />
           </NameContainer>
           <TargetCont>
-            <TargetDiv ref={targetRefSun} />
-            <TargetDiv ref={targetRefAsc} />
-            <TargetDiv ref={targetRefMoon} />
+            <TargetDesign>
+              <TargetDiv attached={attached} />
+              <TargetDiv attached={attached} />
+              <TargetDiv attached={attached} />
+            </TargetDesign>
+            <TargetRef>
+              <TargetDivRef ref={targetRefSun} />
+              <TargetDivRef ref={targetRefAsc} />
+              <TargetDivRef ref={targetRefMoon} />
+            </TargetRef>
           </TargetCont>
         </FormSection>
         <input name="sun" type="hidden" value={form.sun} />
