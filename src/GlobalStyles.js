@@ -20,7 +20,7 @@ html {
 }
 body{
   width:100%;
-   height: ${vh}px;
+  height: ${vh}px;
   display:flex;
   flex-direction:column;
   justify-content:center;

@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSprings } from "react-spring";
 import { useDrag } from "@use-gesture/react";
 import {
+  InputsContainer,
+  NameContainer,
   ImgSign,
   SignContainer,
   TargetDiv,
   TargetCont,
+  FormSection,
+  InputName,
 } from "./CrudForm.styles.js";
 import data from "../helpers/signs.json";
+const IS_MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 const initialForm = { name: "", sun: "", ascendant: "", moon: "", id: null };
 
 const CrudForm = ({ createData }) => {
   const [form, setForm] = useState(initialForm);
+  const [dragging, setDragging] = useState(false);
+  const [attached, setAttached] = useState(false);
+  const targetRefSun = useRef(null);
+  const targetRefAsc = useRef(null);
+  const targetRefMoon = useRef(null);
 
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
@@ -20,21 +30,42 @@ const CrudForm = ({ createData }) => {
   }));
 
   const bind = useDrag(
-    ({ args: [originalIndex], offset: [ox, oy] }) => {
-      api.start((index) => {
-        if (index !== originalIndex) return;
+    ({
+      args: [originalIndex],
+      active,
+      last,
+      xy: [x, y],
+      movement: [mx, my],
+    }) => {
+      setDragging(active);
+      // console.log(pointer.capure);
+      // setAttached(document.setPointerCapture(x, y) === targetRefSun.current);
+      // setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
+      // !IS_MOBILE && this.setPointerCapture(targetRefSun.current);
+      if (IS_MOBILE) {
+        setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
+      } else {
+        setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
+      }
 
-        return {
-          x: ox,
-          y: oy,
-        };
-      });
-    },
-    {
-      from: ({ args: [originalIndex] }) => [
-        props[originalIndex].x.get(),
-        props[originalIndex].y.get(),
-      ],
+      if (last) {
+        api.start((index) => {
+          if (index !== originalIndex) return;
+          return {
+            x: attached ? 300 : 0,
+            y: 0,
+          };
+        });
+      } else {
+        api.start((index) => {
+          if (index !== originalIndex) return;
+          return {
+            x: mx + 10,
+            y: my + 10,
+            immediate: true,
+          };
+        });
+      }
     }
   );
 
@@ -59,41 +90,46 @@ const CrudForm = ({ createData }) => {
   };
 
   return (
-    <>
+    <InputsContainer>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          onChange={handleChange}
-          value={form.name}
-        />
-        <TargetCont>
-          <TargetDiv />
-          <TargetDiv />
-          <TargetDiv />
-        </TargetCont>
+        <FormSection>
+          <NameContainer>
+            <InputName
+              type="text"
+              name="name"
+              placeholder="Your name"
+              onChange={handleChange}
+              value={form.name}
+            />
+          </NameContainer>
+          <TargetCont>
+            <TargetDiv ref={targetRefSun} />
+            <TargetDiv ref={targetRefAsc} />
+            <TargetDiv ref={targetRefMoon} />
+          </TargetCont>
+        </FormSection>
         <input name="sun" type="hidden" value={form.sun} />
         <input name="ascendant" type="hidden" value={form.ascendant} />
         <input name="moon" type="hidden" value={form.moon} />
-        <input type="submit" value="Enviar" />
-        <input type="reset" value="Limpiar" onClick={handleReset} />
+        {/* <input type="submit" value="Enviar" />
+        <input type="reset" value="Limpiar" onClick={handleReset} /> */}
+
+        <SignContainer>
+          {props && props.length > 0 ? (
+            props.map(({ x, y }, i) => (
+              <ImgSign
+                img={`signs/imgs/${data.signs[i].img}`}
+                key={data.signs[i].id}
+                {...bind(i)}
+                style={{ x, y }}
+              />
+            ))
+          ) : (
+            <p>Sin datos</p>
+          )}
+        </SignContainer>
       </form>
-      <SignContainer>
-        {props && props.length > 0 ? (
-          props.map(({ x, y }, i) => (
-            <ImgSign
-              img={`signs/imgs/${data.signs[i].img}`}
-              key={data.signs[i].id}
-              {...bind(i)}
-              style={{ x, y }}
-            />
-          ))
-        ) : (
-          <p>Sin datos</p>
-        )}
-      </SignContainer>
-    </>
+    </InputsContainer>
   );
 };
 
