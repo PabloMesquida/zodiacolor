@@ -47,10 +47,9 @@ const CrudForm = ({ createData }) => {
       movement: [mx, my],
     }) => {
       setDragging(active);
-      console.log(active, dragging);
 
       setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
-
+      console.log(active, dragging, attached);
       if (last) {
         api.start((index) => {
           if (index !== originalIndex) return;
