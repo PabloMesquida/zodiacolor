@@ -63,7 +63,7 @@ const CrudForm = ({ createData }) => {
       if (last) {
         api.start((index) => {
           if (index !== originalIndex) return;
-          // setSign(signType, s.id, tSun, tSunRef);
+          setSign(signType, s.id, tSun, tSunRef);
 
           return {
             x: attachedSun ? tSunPos.x - sPos.x - 57 : 0,
