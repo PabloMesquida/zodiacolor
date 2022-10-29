@@ -49,15 +49,17 @@ const CrudApi = () => {
 
   return (
     <SectionContainer>
-      <CrudForm createData={createData} />
-      {loading && <div>Loading.</div>}
-      {error && (
-        <Message
-          msg={`Error ${error.status}: ${error.statusText}`}
-          bgColor="#dc3545"
-        />
-      )}
-      {db && <CrudTable data={db} />}
+      <React.StrictMode>
+        <CrudForm createData={createData} />
+        {loading && <div>Loading.</div>}
+        {error && (
+          <Message
+            msg={`Error ${error.status}: ${error.statusText}`}
+            bgColor="#dc3545"
+          />
+        )}
+        {db && <CrudTable data={db} />}
+      </React.StrictMode>
     </SectionContainer>
   );
 };

@@ -23,7 +23,6 @@ const TARGET_SIZE = "68px";
 const CrudForm = ({ createData }) => {
   const [form, setForm] = useState(initialForm);
   const [dragging, setDragging] = useState(false);
-  const [attached, setAttached] = useState(false);
   const [attachedSun, setAttachedSun] = useState(false);
   const [attachedAsc, setAttachedAsc] = useState(false);
   const [attachedMoon, setAttachedMoon] = useState(false);
@@ -47,18 +46,31 @@ const CrudForm = ({ createData }) => {
       movement: [mx, my],
     }) => {
       setDragging(active);
-      console.log(active, dragging);
+      document.elementFromPoint(x, y) === targetRefSun.current
+        ? setAttachedSun(true)
+        : setAttachedSun(false);
 
-      setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
+      attachedSun && (signType = "sun");
+      setAttachedAsc(document.elementFromPoint(x, y) === targetRefAsc.current);
+      attachedAsc && (signType = "asc");
+      setAttachedMoon(
+        document.elementFromPoint(x, y) === targetRefMoon.current
+      );
+      attachedMoon && (signType = "moon");
 
+      let s = document.getElementById(originalIndex);
+      let sPos = s.getBoundingClientRect();
+      let tSun = document.getElementById("target-sun");
+      let tSunPos = tSun.getBoundingClientRect();
+      let tSunRef = targetRefSun.current;
       if (last) {
         api.start((index) => {
           if (index !== originalIndex) return;
-          // setSign(signType, s.id, tSun, tSunRef);
+          setSign(signType, s.id, tSun, tSunRef);
 
           return {
-            x: 50, //attachedSun ? tSunPos.x - sPos.x - 57 : 0,
-            y: 50, //attachedSun ? tSunPos.y - sPos.y + 8 : 0,
+            x: attachedSun ? tSunPos.x - sPos.x - 57 : 0,
+            y: attachedSun ? tSunPos.y - sPos.y + 8 : 0,
           };
         });
       } else {
