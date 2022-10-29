@@ -63,7 +63,6 @@ export const TargetDiv = styled.div`
   width: 68px;
   height: 68px;
   background-color: ${({ attached }) => (attached ? "white" : "#54BAB9")};
-
   border-radius: 50px;
 `;
 

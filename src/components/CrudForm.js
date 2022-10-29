@@ -15,14 +15,17 @@ import {
   TargetRef,
 } from "./CrudForm.styles.js";
 import data from "../helpers/signs.json";
-const IS_MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 const initialForm = { name: "", sun: "", ascendant: "", moon: "", id: null };
+
+const TARGET_SIZE = "68px";
 
 const CrudForm = ({ createData }) => {
   const [form, setForm] = useState(initialForm);
   const [dragging, setDragging] = useState(false);
-  const [attached, setAttached] = useState(false);
+  const [attachedSun, setAttachedSun] = useState(false);
+  const [attachedAsc, setAttachedAsc] = useState(false);
+  const [attachedMoon, setAttachedMoon] = useState(false);
   const targetRefSun = useRef(null);
   const targetRefAsc = useRef(null);
   const targetRefMoon = useRef(null);
@@ -31,6 +34,8 @@ const CrudForm = ({ createData }) => {
     x: 0,
     y: 0,
   }));
+
+  let signType;
 
   const bind = useDrag(
     ({
@@ -41,13 +46,28 @@ const CrudForm = ({ createData }) => {
       movement: [mx, my],
     }) => {
       setDragging(active);
-      setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
+      setAttachedSun(document.elementFromPoint(x, y) === targetRefSun.current);
+      attachedSun && (signType = "sun");
+      setAttachedAsc(document.elementFromPoint(x, y) === targetRefAsc.current);
+      attachedAsc && (signType = "asc");
+      setAttachedMoon(
+        document.elementFromPoint(x, y) === targetRefMoon.current
+      );
+      attachedMoon && (signType = "moon");
+
+      let s = document.getElementById(originalIndex);
+      let sPos = s.getBoundingClientRect();
+      let tSun = document.getElementById("target-sun");
+      let tSunPos = tSun.getBoundingClientRect();
+      let tSunRef = targetRefSun.current;
       if (last) {
         api.start((index) => {
           if (index !== originalIndex) return;
+          // setSign(signType, s.id, tSun, tSunRef);
+
           return {
-            x: attached ? 300 : 0,
-            y: 0,
+            x: attachedSun ? tSunPos.x - sPos.x - 57 : 0,
+            y: attachedSun ? tSunPos.y - sPos.y + 8 : 0,
           };
         });
       } else {
@@ -66,6 +86,7 @@ const CrudForm = ({ createData }) => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name || !form.sun || !form.ascendant || !form.moon) {
@@ -83,6 +104,15 @@ const CrudForm = ({ createData }) => {
     setForm(initialForm);
   };
 
+  const setSign = (target, sign, targetCont, targetRef) => {
+    setForm({ ...form, [target]: sign });
+    targetRef.style.zIndex = -100;
+    targetCont.style.backgroundColor = "white";
+    // setAttachedSun(false);
+    // setAttachedAsc(false);
+    // setAttachedMoon(false);
+  };
+
   return (
     <InputsContainer>
       <form onSubmit={handleSubmit}>
@@ -98,9 +128,21 @@ const CrudForm = ({ createData }) => {
           </NameContainer>
           <TargetCont>
             <TargetDesign>
-              <TargetDiv attached={attached} />
-              <TargetDiv attached={attached} />
-              <TargetDiv attached={attached} />
+              <TargetDiv
+                size={TARGET_SIZE}
+                attached={attachedSun}
+                id="target-sun"
+              />
+              <TargetDiv
+                size={TARGET_SIZE}
+                attached={attachedAsc}
+                id="target-asc"
+              />
+              <TargetDiv
+                size={TARGET_SIZE}
+                attached={attachedMoon}
+                id="target-moon"
+              />
             </TargetDesign>
             <TargetRef>
               <TargetDivRef ref={targetRefSun} />
@@ -109,7 +151,7 @@ const CrudForm = ({ createData }) => {
             </TargetRef>
           </TargetCont>
         </FormSection>
-        <input name="sun" type="hidden" value={form.sun} />
+        <input id="sun" name="sun" type="hidden" value={form.sun} />
         <input name="ascendant" type="hidden" value={form.ascendant} />
         <input name="moon" type="hidden" value={form.moon} />
         {/* <input type="submit" value="Enviar" />
@@ -123,6 +165,7 @@ const CrudForm = ({ createData }) => {
                 key={data.signs[i].id}
                 {...bind(i)}
                 style={{ x, y }}
+                id={data.signs[i].id}
               />
             ))
           ) : (
