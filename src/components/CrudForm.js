@@ -48,7 +48,11 @@ const CrudForm = ({ createData }) => {
     }) => {
       setDragging(active);
 
-      setAttached(document.elementFromPoint(x, y) === targetRefSun.current);
+      setAttachedSun(document.elementFromPoint(x, y) === targetRefSun.current);
+      setAttachedAsc(document.elementFromPoint(x, y) === targetRefAsc.current);
+      setAttachedMoon(
+        document.elementFromPoint(x, y) === targetRefMoon.current
+      );
       console.log(active, dragging, attached);
       if (last) {
         api.start((index) => {
