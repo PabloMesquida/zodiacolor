@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSprings } from "react-spring";
 import { useDrag } from "@use-gesture/react";
 import {
@@ -18,7 +18,7 @@ import data from "../helpers/signs.json";
 
 const initialForm = { name: "", sun: "", ascendant: "", moon: "", id: null };
 
-const TARGET_SIZE = "68px";
+const TARGET_SIZE = 68;
 
 const CrudForm = ({ createData }) => {
   const [form, setForm] = useState(initialForm);
@@ -30,11 +30,16 @@ const CrudForm = ({ createData }) => {
   const targetRefSun = useRef(null);
   const targetRefAsc = useRef(null);
   const targetRefMoon = useRef(null);
+  const refArray = useRef([]);
+  const [iPosX, setIPosX] = useState();
+  const [iPosY, setIPosY] = useState();
 
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
     y: 0,
   }));
+
+  useEffect(() => {}, []);
 
   let signType;
 
@@ -43,8 +48,10 @@ const CrudForm = ({ createData }) => {
       args: [originalIndex],
       active,
       last,
+      first,
       xy: [x, y],
       movement: [mx, my],
+      initial: [ix, iy],
     }) => {
       setDragging(active);
 
@@ -53,23 +60,37 @@ const CrudForm = ({ createData }) => {
       setAttachedMoon(
         document.elementFromPoint(x, y) === targetRefMoon.current
       );
-      console.log(active, dragging, attached);
-      if (last) {
+
+      let xPos, yPos, target, targetPos;
+
+      if (first) {
         api.start((index) => {
           if (index !== originalIndex) return;
-          // setSign(signType, s.id, tSun, tSunRef);
-
+          setIPosX(refArray.current[index].getBoundingClientRect().x);
+          setIPosY(refArray.current[index].getBoundingClientRect().y);
+        });
+      } else if (last) {
+        api.start((index) => {
+          if (index !== originalIndex) return;
+          if (attachedSun) {
+            target = document.getElementById("target-sun");
+            targetPos = target.getBoundingClientRect();
+            xPos = targetPos.x - iPosX + TARGET_SIZE / 8;
+            yPos = targetPos.y - iPosY + TARGET_SIZE / 8;
+          }
           return {
-            x: 50, //attachedSun ? tSunPos.x - sPos.x - 57 : 0,
-            y: 50, //attachedSun ? tSunPos.y - sPos.y + 8 : 0,
+            x: xPos,
+            y: yPos,
           };
+
+          // setSign(signType, s.id, tSun, tSunRef);
         });
       } else {
         api.start((index) => {
           if (index !== originalIndex) return;
           return {
-            x: mx + 10,
-            y: my + 10,
+            x: mx,
+            y: my,
             immediate: true,
           };
         });
@@ -159,7 +180,10 @@ const CrudForm = ({ createData }) => {
                 key={data.signs[i].id}
                 {...bind(i)}
                 style={{ x, y }}
-                id={data.signs[i].id}
+                id={i}
+                ref={(ref) => {
+                  refArray.current[i] = ref;
+                }}
               />
             ))
           ) : (
