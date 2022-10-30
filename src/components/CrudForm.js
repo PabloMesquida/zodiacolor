@@ -41,8 +41,6 @@ const CrudForm = ({ createData }) => {
 
   useEffect(() => {}, []);
 
-  let signType;
-
   const bind = useDrag(
     ({
       args: [originalIndex],
@@ -51,7 +49,6 @@ const CrudForm = ({ createData }) => {
       first,
       xy: [x, y],
       movement: [mx, my],
-      initial: [ix, iy],
     }) => {
       setDragging(active);
 
@@ -77,13 +74,28 @@ const CrudForm = ({ createData }) => {
             targetPos = target.getBoundingClientRect();
             xPos = targetPos.x - iPosX + TARGET_SIZE / 8;
             yPos = targetPos.y - iPosY + TARGET_SIZE / 8;
+            setSign("sun", index, targetRefSun.current, target);
+          } else if (attachedAsc) {
+            target = document.getElementById("target-asc");
+            targetPos = target.getBoundingClientRect();
+            xPos = targetPos.x - iPosX + TARGET_SIZE / 8;
+            yPos = targetPos.y - iPosY + TARGET_SIZE / 8;
+            setSign("ascendant", index, targetRefAsc.current, target);
+          } else if (attachedMoon) {
+            target = document.getElementById("target-moon");
+            targetPos = target.getBoundingClientRect();
+            xPos = targetPos.x - iPosX + TARGET_SIZE / 8;
+            yPos = targetPos.y - iPosY + TARGET_SIZE / 8;
+            setSign("moon", index, targetRefMoon.current, target);
+          } else {
+            xPos = 0;
+            yPos = 0;
           }
+
           return {
             x: xPos,
             y: yPos,
           };
-
-          // setSign(signType, s.id, tSun, tSunRef);
         });
       } else {
         api.start((index) => {
@@ -119,13 +131,13 @@ const CrudForm = ({ createData }) => {
     setForm(initialForm);
   };
 
-  const setSign = (target, sign, targetCont, targetRef) => {
+  const setSign = (target, sign, targetRef, targetCont) => {
     setForm({ ...form, [target]: sign });
-    targetRef.style.zIndex = -100;
     targetCont.style.backgroundColor = "white";
-    // setAttachedSun(false);
-    // setAttachedAsc(false);
-    // setAttachedMoon(false);
+    targetRef.style.zIndex = -100;
+    setAttachedSun(false);
+    setAttachedAsc(false);
+    setAttachedMoon(false);
   };
 
   return (
