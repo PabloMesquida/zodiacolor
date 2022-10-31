@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useSprings } from "react-spring";
 import { useDrag } from "@use-gesture/react";
 import {
@@ -23,7 +23,6 @@ const TARGET_SIZE = 68;
 const CrudForm = ({ createData }) => {
   const [form, setForm] = useState(initialForm);
   const [dragging, setDragging] = useState(false);
-  const [attached, setAttached] = useState(false);
   const [attachedSun, setAttachedSun] = useState(false);
   const [attachedAsc, setAttachedAsc] = useState(false);
   const [attachedMoon, setAttachedMoon] = useState(false);
@@ -37,9 +36,8 @@ const CrudForm = ({ createData }) => {
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
     y: 0,
+    opacity: 0,
   }));
-
-  useEffect(() => {}, []);
 
   const bind = useDrag(
     ({
@@ -91,7 +89,6 @@ const CrudForm = ({ createData }) => {
             xPos = 0;
             yPos = 0;
           }
-
           return {
             x: xPos,
             y: yPos,
@@ -138,6 +135,21 @@ const CrudForm = ({ createData }) => {
     setAttachedSun(false);
     setAttachedAsc(false);
     setAttachedMoon(false);
+    setTimeout(() => {
+      console.log("ok");
+      document.getElementById(
+        sign
+      ).style.cssText = `transform: translate3d(0px, 0px, 0px); scale:0;`;
+    }, 1000);
+    setTimeout(() => {
+      console.log("ok2");
+      document.getElementById(
+        sign
+      ).style.cssText = `animation: scale-up-center 0.2s ease-in-out both;`;
+    }, 2000);
+    setTimeout(() => {
+      document.getElementById(sign).style.removeProperty("animation");
+    }, 2300);
   };
 
   return (

@@ -7,9 +7,6 @@ export const InputsContainer = styled.div`
 
 export const NameContainer = styled.div`
   width: 100%;
-  @media (min-width: 640px) {
-    width: 65%;
-  }
 `;
 
 export const FormSection = styled.div`
@@ -17,9 +14,6 @@ export const FormSection = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 2rem;
-  @media (min-width: 640px) {
-    flex-direction: row;
-  }
 `;
 
 export const ImgSign = styled(animated.div)`
@@ -35,6 +29,15 @@ export const ImgSign = styled(animated.div)`
   border-radius: 50px;
   z-index: 1;
   margin: 0.4rem;
+
+  @keyframes scale-up-center {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
 
 export const SignContainer = styled.div`
@@ -42,6 +45,15 @@ export const SignContainer = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  height: 194px;
+`;
+
+export const SignContainers = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 194px;
 `;
 
 export const InputName = styled.input`
@@ -54,9 +66,6 @@ export const InputName = styled.input`
   font-size: 1.5rem;
   padding: 0.5rem 0.5rem 0 0;
   margin-bottom: 2rem;
-  @media (min-width: 640px) {
-    margin-bottom: 0;
-  }
 `;
 
 export const TargetDiv = styled.div`
@@ -79,11 +88,6 @@ export const TargetCont = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 70px;
-
-  @media (min-width: 640px) {
-    width: 30%;
-    min-width: 250px;
-  }
 `;
 
 export const TargetDesign = styled.div`

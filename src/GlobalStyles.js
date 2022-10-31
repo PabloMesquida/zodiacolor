@@ -43,9 +43,7 @@ h1{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 	animation: gradient 15s ease infinite;
-  
-  //border-bottom: 1px solid #333;
- // margin-bottom: 2rem;
+
 }
 
 @keyframes gradient {
