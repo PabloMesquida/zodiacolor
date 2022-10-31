@@ -36,7 +36,6 @@ const CrudForm = ({ createData }) => {
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
     y: 0,
-    scale: 1,
   }));
 
   const bind = useDrag(
@@ -133,12 +132,14 @@ const CrudForm = ({ createData }) => {
 
   const setSign = (target, sign, targetRef, targetCont) => {
     setForm({ ...form, [target]: sign });
-    targetCont.style.backgroundColor = "white";
+    targetCont.style.cssText = "border: 10px solid white; ";
+    targetCont.style.backgroundImage = "url(./signs/imgs/taurus.png)";
     targetRef.style.zIndex = -100;
     setAttachedSun(false);
     setAttachedAsc(false);
     setAttachedMoon(false);
     setTimeout(() => {
+      setStatic(targetCont, sign);
       document.getElementById(
         sign
       ).style.cssText = `transform: translate3d(0px, 0px, 0px); scale:0;`;
@@ -158,6 +159,11 @@ const CrudForm = ({ createData }) => {
     setTimeout(() => {
       document.getElementById(sign).style.removeProperty("animation");
     }, 2300);
+  };
+
+  const setStatic = (target, id) => {
+    console.log(data.signs[id].img);
+    target.style.cssText = `border: 10px solid white; background-color: lightblueurl; background-image: url(signs/imgs/${data.signs[id].img}); background-size: cover;  background-position: center;`;
   };
 
   return (
