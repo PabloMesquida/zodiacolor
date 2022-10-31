@@ -36,7 +36,7 @@ const CrudForm = ({ createData }) => {
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
     y: 0,
-    opacity: 0,
+    scale: 1,
   }));
 
   const bind = useDrag(
@@ -49,7 +49,6 @@ const CrudForm = ({ createData }) => {
       movement: [mx, my],
     }) => {
       setDragging(active);
-
       setAttachedSun(document.elementFromPoint(x, y) === targetRefSun.current);
       setAttachedAsc(document.elementFromPoint(x, y) === targetRefAsc.current);
       setAttachedMoon(
@@ -60,7 +59,11 @@ const CrudForm = ({ createData }) => {
 
       if (first) {
         api.start((index) => {
-          if (index !== originalIndex) return;
+          if (index !== originalIndex)
+            return {
+              x: 0,
+              y: 0,
+            };
           setIPosX(refArray.current[index].getBoundingClientRect().x);
           setIPosY(refArray.current[index].getBoundingClientRect().y);
         });
@@ -136,13 +139,18 @@ const CrudForm = ({ createData }) => {
     setAttachedAsc(false);
     setAttachedMoon(false);
     setTimeout(() => {
-      console.log("ok");
       document.getElementById(
         sign
       ).style.cssText = `transform: translate3d(0px, 0px, 0px); scale:0;`;
+      api.start((index) => {
+        if (index === sign)
+          return {
+            x: 0,
+            y: 0,
+          };
+      });
     }, 1000);
     setTimeout(() => {
-      console.log("ok2");
       document.getElementById(
         sign
       ).style.cssText = `animation: scale-up-center 0.2s ease-in-out both;`;
@@ -203,7 +211,7 @@ const CrudForm = ({ createData }) => {
                 img={`signs/imgs/${data.signs[i].img}`}
                 key={data.signs[i].id}
                 {...bind(i)}
-                style={{ x, y }}
+                style={{ x, y, display: i > 11 ? "none" : "inline" }}
                 id={i}
                 ref={(ref) => {
                   refArray.current[i] = ref;
