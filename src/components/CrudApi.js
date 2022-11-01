@@ -58,7 +58,7 @@ const CrudApi = () => {
             bgColor="#dc3545"
           />
         )}
-        {db && <CrudTable data={db} />}
+        {/* {db && <CrudTable data={db} />} */}
       </React.StrictMode>
     </SectionContainer>
   );

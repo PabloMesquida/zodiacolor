@@ -65,7 +65,26 @@ export const InputName = styled.input`
   font-weight: bold;
   font-size: 1.5rem;
   padding: 0.5rem 0.5rem 0 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
+
+  &:focus {
+    outline: none;
+    color: #363636;
+  }
+`;
+
+export const InputSubmit = styled.input`
+  height: 62px;
+  width: 62px;
+  border-radius: 50px;
+  margin-top: 10px;
+  background-color: ${({ theme }) => theme.colorSubmitOk};
+  border: 0;
+  font-family: "Fredoka One", cursive;
+  font-size: 1rem;
+  color: white;
+  margin-top: 1.5rem;
+  border: 5px solid white;
 `;
 
 export const TargetDiv = styled.div`
@@ -87,7 +106,7 @@ export const TargetCont = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: 50px;
 `;
 
 export const TargetDesign = styled.div`
@@ -104,4 +123,11 @@ export const TargetRef = styled.div`
   justify-content: space-between;
   position: absolute;
   width: 100%;
+`;
+
+export const SubmitContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  text-align: center;
 `;

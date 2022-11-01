@@ -13,6 +13,8 @@ import {
   InputName,
   TargetDesign,
   TargetRef,
+  SubmitContainer,
+  InputSubmit,
 } from "./CrudForm.styles.js";
 import data from "../helpers/signs.json";
 
@@ -132,17 +134,16 @@ const CrudForm = ({ createData }) => {
 
   const setSign = (target, sign, targetRef, targetCont) => {
     setForm({ ...form, [target]: sign });
-    targetCont.style.cssText = "border: 10px solid white; ";
-    targetCont.style.backgroundImage = "url(./signs/imgs/taurus.png)";
+    targetCont.style.cssText =
+      "border: 10px solid white; background-color: white; ";
     targetRef.style.zIndex = -100;
     setAttachedSun(false);
     setAttachedAsc(false);
     setAttachedMoon(false);
     setTimeout(() => {
       setStatic(targetCont, sign);
-      document.getElementById(
-        sign
-      ).style.cssText = `transform: translate3d(0px, 0px, 0px); scale:0;`;
+      document.getElementById(sign).style.cssText =
+        "transform: translate3d(0px, 0px, 0px); scale:0;";
       api.start((index) => {
         if (index === sign)
           return {
@@ -152,9 +153,8 @@ const CrudForm = ({ createData }) => {
       });
     }, 1000);
     setTimeout(() => {
-      document.getElementById(
-        sign
-      ).style.cssText = `animation: scale-up-center 0.2s ease-in-out both;`;
+      document.getElementById(sign).style.cssText =
+        "animation: scale-up-center 0.2s ease-in-out both;";
     }, 2000);
     setTimeout(() => {
       document.getElementById(sign).style.removeProperty("animation");
@@ -163,7 +163,7 @@ const CrudForm = ({ createData }) => {
 
   const setStatic = (target, id) => {
     console.log(data.signs[id].img);
-    target.style.cssText = `border: 10px solid white; background-color: lightblueurl; background-image: url(signs/imgs/${data.signs[id].img}); background-size: cover;  background-position: center;`;
+    target.style.cssText = `border: 10px solid white; background-image: url(signs/imgs/${data.signs[id].img}); background-size: cover;  background-position: center; background-color: lightblue;`;
   };
 
   return (
@@ -207,8 +207,8 @@ const CrudForm = ({ createData }) => {
         <input id="sun" name="sun" type="hidden" value={form.sun} />
         <input name="ascendant" type="hidden" value={form.ascendant} />
         <input name="moon" type="hidden" value={form.moon} />
-        {/* <input type="submit" value="Enviar" />
-        <input type="reset" value="Limpiar" onClick={handleReset} /> */}
+
+        {/*  <input type="reset" value="Limpiar" onClick={handleReset} /> */}
 
         <SignContainer>
           {props && props.length > 0 ? (
@@ -228,6 +228,9 @@ const CrudForm = ({ createData }) => {
             <p>Sin datos</p>
           )}
         </SignContainer>
+        <SubmitContainer>
+          <InputSubmit type="submit" value="OK" />
+        </SubmitContainer>
       </form>
     </InputsContainer>
   );
