@@ -83,7 +83,7 @@ export const InputSubmit = styled.input`
   font-family: "Fredoka One", cursive;
   font-size: 1rem;
   color: white;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   border: 5px solid white;
 `;
 
@@ -129,5 +129,32 @@ export const SubmitContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  text-align: center;
+  align-items: flex-end;
+`;
+
+export const Credits = styled.p`
+  font-size: 0.8rem;
+  color: #999;
+
+  a {
+    text-decoration: none;
+    color: #999;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: #999;
+  }
+`;
+
+export const Messages = styled.div`
+  width: 200px;
+  height: 62px;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: bolder;
+  color: ${({ theme }) => theme.colorError};
 `;

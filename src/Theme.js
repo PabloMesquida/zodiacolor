@@ -4,6 +4,7 @@ const Theme = {
   colorThree: "#1572a1",
   colorFour: "#54BAB9",
   colorSubmitOk: "#00b4d8",
+  colorError: "#e63946",
 };
 
 export { Theme };

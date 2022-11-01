@@ -15,6 +15,8 @@ import {
   TargetRef,
   SubmitContainer,
   InputSubmit,
+  Credits,
+  Messages,
 } from "./CrudForm.styles.js";
 import data from "../helpers/signs.json";
 
@@ -34,6 +36,7 @@ const CrudForm = ({ createData }) => {
   const refArray = useRef([]);
   const [iPosX, setIPosX] = useState();
   const [iPosY, setIPosY] = useState();
+  const [message, setMessage] = useState("");
 
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
@@ -118,7 +121,7 @@ const CrudForm = ({ createData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name || !form.sun || !form.ascendant || !form.moon) {
-      alert("Datos incompletos");
+      setMessage("Incomplete data");
       return;
     }
 
@@ -229,9 +232,19 @@ const CrudForm = ({ createData }) => {
           )}
         </SignContainer>
         <SubmitContainer>
-          <InputSubmit type="submit" value="OK" />
+          <Messages>{message}</Messages>
+          <InputSubmit type="submit" value="OK" onClick={handleSubmit} />
         </SubmitContainer>
       </form>
+      <Credits>
+        <a
+          href="https://pixelfaces.vercel.app"
+          target="_blank"
+          rel="noreferrer"
+        >
+          ✨ Pixel Faces
+        </a>
+      </Credits>
     </InputsContainer>
   );
 };
