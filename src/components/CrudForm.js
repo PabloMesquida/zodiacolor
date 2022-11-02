@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useSprings } from "react-spring";
+import { useSprings, config } from "react-spring";
 import { useDrag } from "@use-gesture/react";
 import {
   InputsContainer,
@@ -9,6 +9,7 @@ import {
   TargetDiv,
   TargetDivRef,
   TargetCont,
+  TargetsCont,
   FormSection,
   InputName,
   TargetDesign,
@@ -17,6 +18,7 @@ import {
   InputSubmit,
   Credits,
   Messages,
+  Alert,
 } from "./CrudForm.styles.js";
 import data from "../helpers/signs.json";
 
@@ -41,6 +43,7 @@ const CrudForm = ({ createData }) => {
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
     y: 0,
+    config: { mass: 1, tension: 500, friction: 18 },
   }));
 
   const bind = useDrag(
@@ -120,7 +123,12 @@ const CrudForm = ({ createData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.sun || !form.ascendant || !form.moon) {
+    if (
+      !form.name ||
+      (!form.sun && form.sun !== 0) ||
+      (!form.ascendant && form.ascendant !== 0) ||
+      (!form.moon && form.moon !== 0)
+    ) {
       setMessage("Incomplete data");
       return;
     }
@@ -138,7 +146,7 @@ const CrudForm = ({ createData }) => {
   const setSign = (target, sign, targetRef, targetCont) => {
     setForm({ ...form, [target]: sign });
     targetCont.style.cssText =
-      "border: 10px solid white; background-color: white; ";
+      "border: 10px solid white; background-color: white;";
     targetRef.style.zIndex = -100;
     setAttachedSun(false);
     setAttachedAsc(false);
@@ -154,18 +162,17 @@ const CrudForm = ({ createData }) => {
             y: 0,
           };
       });
-    }, 1000);
+    }, 500);
     setTimeout(() => {
       document.getElementById(sign).style.cssText =
         "animation: scale-up-center 0.2s ease-in-out both;";
-    }, 2000);
+    }, 1000);
     setTimeout(() => {
       document.getElementById(sign).style.removeProperty("animation");
-    }, 2300);
+    }, 1200);
   };
 
   const setStatic = (target, id) => {
-    console.log(data.signs[id].img);
     target.style.cssText = `border: 10px solid white; background-image: url(signs/imgs/${data.signs[id].img}); background-size: cover;  background-position: center; background-color: lightblue;`;
   };
 
@@ -181,37 +188,51 @@ const CrudForm = ({ createData }) => {
               onChange={handleChange}
               value={form.name}
             />
+            {message && !form.name && <Alert sec="name">!</Alert>}
           </NameContainer>
-          <TargetCont>
+          <TargetsCont>
             <TargetDesign>
-              <TargetDiv
-                size={TARGET_SIZE}
-                attached={attachedSun}
-                id="target-sun"
-              />
-              <TargetDiv
-                size={TARGET_SIZE}
-                attached={attachedAsc}
-                id="target-asc"
-              />
-              <TargetDiv
-                size={TARGET_SIZE}
-                attached={attachedMoon}
-                id="target-moon"
-              />
+              <TargetCont>
+                <TargetDiv
+                  size={TARGET_SIZE}
+                  attached={attachedSun}
+                  id="target-sun"
+                />
+                {message && !form.sun && form.sun !== 0 && (
+                  <Alert sec="target">!</Alert>
+                )}
+              </TargetCont>
+              <TargetCont>
+                <TargetDiv
+                  size={TARGET_SIZE}
+                  attached={attachedAsc}
+                  id="target-asc"
+                />
+                {message && !form.ascendant && form.ascendant !== 0 && (
+                  <Alert sec="target">!</Alert>
+                )}
+              </TargetCont>
+              <TargetCont>
+                <TargetDiv
+                  size={TARGET_SIZE}
+                  attached={attachedMoon}
+                  id="target-moon"
+                />
+                {message && !form.moon && form.moon !== 0 && (
+                  <Alert sec="target">!</Alert>
+                )}
+              </TargetCont>
             </TargetDesign>
             <TargetRef>
               <TargetDivRef ref={targetRefSun} />
               <TargetDivRef ref={targetRefAsc} />
               <TargetDivRef ref={targetRefMoon} />
             </TargetRef>
-          </TargetCont>
+          </TargetsCont>
         </FormSection>
         <input id="sun" name="sun" type="hidden" value={form.sun} />
         <input name="ascendant" type="hidden" value={form.ascendant} />
         <input name="moon" type="hidden" value={form.moon} />
-
-        {/*  <input type="reset" value="Limpiar" onClick={handleReset} /> */}
 
         <SignContainer>
           {props && props.length > 0 ? (
@@ -232,7 +253,12 @@ const CrudForm = ({ createData }) => {
           )}
         </SignContainer>
         <SubmitContainer>
-          <Messages>{message}</Messages>
+          {message && (
+            <Messages>
+              {message} <Alert>!</Alert>
+            </Messages>
+          )}
+
           <InputSubmit type="submit" value="OK" onClick={handleSubmit} />
         </SubmitContainer>
       </form>

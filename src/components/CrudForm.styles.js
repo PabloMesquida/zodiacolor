@@ -6,7 +6,16 @@ export const InputsContainer = styled.div`
 `;
 
 export const NameContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
+`;
+
+export const TargetCont = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const FormSection = styled.div`
@@ -57,6 +66,7 @@ export const SignContainers = styled.div`
 `;
 
 export const InputName = styled.input`
+  position: abosolute;
   width: 100%;
   height: 68px;
   background-color: transparent;
@@ -79,7 +89,6 @@ export const InputSubmit = styled.input`
   border-radius: 50px;
   margin-top: 10px;
   background-color: ${({ theme }) => theme.colorSubmitOk};
-  border: 0;
   font-family: "Fredoka One", cursive;
   font-size: 1rem;
   color: white;
@@ -101,7 +110,7 @@ export const TargetDivRef = styled.div`
   border-radius: 50px;
 `;
 
-export const TargetCont = styled.div`
+export const TargetsCont = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -150,11 +159,37 @@ export const Credits = styled.p`
 export const Messages = styled.div`
   width: 200px;
   height: 62px;
-  margin-right: 1rem;
+  margin-right: 0rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   font-size: 0.8rem;
-  font-weight: bolder;
+  font-weight: 500;
   color: ${({ theme }) => theme.colorError};
+`;
+
+export const Alert = styled.span`
+  ${({ sec }) =>
+    sec === "name" &&
+    `position: absolute;
+     top: 20px; 
+  `}
+  ${({ sec }) =>
+    sec === "target" &&
+    `position: absolute;
+     left: 50px;
+     top: 15px;
+  `}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-family: "Fredoka One", cursive;
+  font-size: 0.8rem;
+  color: white;
+  background-color: ${({ theme }) => theme.colorError};
+  border-radius: 15px;
+  border: 3px solid white;
+  margin: 0.5rem 0.5rem 0.5rem 0.25rem;
 `;
