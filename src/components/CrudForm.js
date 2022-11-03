@@ -39,6 +39,7 @@ const CrudForm = ({ createData }) => {
   const [iPosX, setIPosX] = useState();
   const [iPosY, setIPosY] = useState();
   const [message, setMessage] = useState("");
+  const [color, setColor] = useState("#ssaamm");
 
   const [props, api] = useSprings(data.signs.length, () => ({
     x: 0,
@@ -134,6 +135,7 @@ const CrudForm = ({ createData }) => {
     }
 
     if (form.id === null) {
+      form.color = color;
       createData(form);
     }
     handleReset();
@@ -144,6 +146,7 @@ const CrudForm = ({ createData }) => {
   };
 
   const setSign = (target, sign, targetRef, targetCont) => {
+    setHex(target, sign);
     setForm({ ...form, [target]: sign });
     targetCont.style.cssText =
       "border: 10px solid white; background-color: white;";
@@ -174,6 +177,60 @@ const CrudForm = ({ createData }) => {
 
   const setStatic = (target, id) => {
     target.style.cssText = `border: 10px solid white; background-image: url(signs/imgs/${data.signs[id].img}); background-size: cover;  background-position: center; background-color: lightblue;`;
+  };
+
+  const setHex = (target, sign) => {
+    let pos1;
+    if (target === "sun") {
+      pos1 = "ss";
+    }
+    if (target === "asc") {
+      pos1 = "aa";
+    }
+    if (target === "moon") {
+      pos1 = "mm";
+    }
+    switch (sign) {
+      case 0:
+        setColor(color.replace(pos1, "ee"));
+        break;
+      case 1:
+        setColor(color.replace(pos1, "dd"));
+        break;
+      case 2:
+        setColor(color.replace(pos1, "cc"));
+        break;
+      case 3:
+        setColor(color.replace(pos1, "bb"));
+        break;
+      case 4:
+        setColor(color.replace(pos1, "aa"));
+        break;
+      case 5:
+        setColor(color.replace(pos1, "99"));
+        break;
+      case 6:
+        setColor(color.replace(pos1, "88"));
+        break;
+      case 7:
+        setColor(color.replace(pos1, "77"));
+        break;
+      case 8:
+        setColor(color.replace(pos1, "66"));
+        break;
+      case 9:
+        setColor(color.replace(pos1, "55"));
+        break;
+      case 10:
+        setColor(color.replace(pos1, "44"));
+        break;
+      case 11:
+        setColor(color.replace(pos1, "33"));
+        break;
+      default:
+        setColor(color.replace(pos1, "ff"));
+    }
+    setForm({ ...form, color: color });
   };
 
   return (

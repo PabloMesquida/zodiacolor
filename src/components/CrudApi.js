@@ -3,7 +3,7 @@ import { helpHttp } from "../helpers/helpHttp";
 import CrudForm from "./CrudForm";
 import CrudTable from "./CrudTable";
 import Message from "./Message";
-import { SectionContainer } from "./CrudApi.styles.js";
+import { SectionContainer, InfoContainer } from "./CrudApi.styles.js";
 
 const CrudApi = () => {
   const [db, setDb] = useState(null);
@@ -30,7 +30,6 @@ const CrudApi = () => {
   }, [url]);
 
   const createData = (data) => {
-    console.log("createData");
     data.id = Date.now();
     let options = {
       body: data,
@@ -50,7 +49,7 @@ const CrudApi = () => {
 
   return (
     <SectionContainer>
-      <React.StrictMode>
+      <InfoContainer>
         <CrudForm createData={createData} />
         {loading && <div>Loading.</div>}
         {error && (
@@ -60,7 +59,7 @@ const CrudApi = () => {
           />
         )}
         {/* {db && <CrudTable data={db} />} */}
-      </React.StrictMode>
+      </InfoContainer>
     </SectionContainer>
   );
 };
