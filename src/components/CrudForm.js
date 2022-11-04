@@ -16,7 +16,6 @@ import {
   TargetRef,
   SubmitContainer,
   InputSubmit,
-  Credits,
   Messages,
   Alert,
 } from "./CrudForm.styles.js";
@@ -319,15 +318,6 @@ const CrudForm = ({ createData }) => {
           <InputSubmit type="submit" value="OK" onClick={handleSubmit} />
         </SubmitContainer>
       </form>
-      <Credits>
-        <a
-          href="https://pixelfaces.vercel.app"
-          target="_blank"
-          rel="noreferrer"
-        >
-          ✨ Pixel Faces
-        </a>
-      </Credits>
     </InputsContainer>
   );
 };

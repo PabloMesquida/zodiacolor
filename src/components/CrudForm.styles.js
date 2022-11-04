@@ -141,21 +141,6 @@ export const SubmitContainer = styled.div`
   align-items: flex-end;
 `;
 
-export const Credits = styled.p`
-  font-size: 0.8rem;
-  color: #999;
-
-  a {
-    text-decoration: none;
-    color: #999;
-  }
-
-  a:hover {
-    text-decoration: none;
-    color: #999;
-  }
-`;
-
 export const Messages = styled.div`
   width: 200px;
   height: 62px;

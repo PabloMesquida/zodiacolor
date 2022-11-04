@@ -1,38 +1,22 @@
 import React from "react";
-import CrudTableRow from "./CrudTableRow";
+import Color from "./Color.js";
+import { TableContainer, ColorTitle, Colors } from "./CrudTable.styles.js";
 
 const CrudTable = ({ data, setDataToEdit, deleteData }) => {
   // console.log(data.length);
   return (
-    <div>
-      <h3>Tabla de datos</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Sun</th>
-            <th>Ascendant</th>
-            <th>Moon</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.length > 0 ? (
-            data.map((el) => (
-              <CrudTableRow
-                key={el.id}
-                el={el}
-                setDataToEdit={setDataToEdit}
-                deleteData={deleteData}
-              />
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3">Sin datos</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+    <TableContainer>
+      <ColorTitle>
+        <h3>Your Color:</h3>
+      </ColorTitle>
+      <Colors>
+        {data.length > 0 ? (
+          data.map((el) => <Color key={el.id} el={el} />)
+        ) : (
+          <div>No Data</div>
+        )}
+      </Colors>
+    </TableContainer>
   );
 };
 
