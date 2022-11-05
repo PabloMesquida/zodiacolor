@@ -1,21 +1,23 @@
 import React from "react";
-import Color from "./Color.js";
-import { TableContainer, ColorTitle, Colors } from "./CrudTable.styles.js";
+import Colors from "./Colors/Colors.js";
+import {
+  TableContainer,
+  ColorTitle,
+  YourColor,
+  LatestColors,
+} from "./CrudTable.styles.js";
 
-const CrudTable = ({ data, setDataToEdit, deleteData }) => {
-  // console.log(data.length);
+const CrudTable = ({ data }) => {
+  console.log(data);
   return (
     <TableContainer>
+      <LatestColors>Latest</LatestColors>
       <ColorTitle>
-        <h3>Your Color:</h3>
+        <h3>Your Color</h3>
+        <YourColor color={data[data.length - 1].color} />
       </ColorTitle>
-      <Colors>
-        {data.length > 0 ? (
-          data.map((el) => <Color key={el.id} el={el} />)
-        ) : (
-          <div>No Data</div>
-        )}
-      </Colors>
+
+      <Colors data={data} />
     </TableContainer>
   );
 };

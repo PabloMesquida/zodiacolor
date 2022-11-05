@@ -66,17 +66,8 @@ const CrudApi = () => {
             bgColor="#dc3545"
           />
         )}
-        {db && <CrudTable data={db} />}
+        {change && <CrudTable data={db} />}
       </InfoContainer>
-      {/* <Credits>
-        <a
-          href="https://pixelfaces.vercel.app"
-          target="_blank"
-          rel="noreferrer"
-        >
-          ✨ Pixel Faces
-        </a>
-      </Credits> */}
     </SectionContainer>
   );
 };

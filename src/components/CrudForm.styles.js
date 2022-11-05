@@ -116,6 +116,7 @@ export const TargetsCont = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 50px;
+  margin-bottom: 10px;
 `;
 
 export const TargetDesign = styled.div`
@@ -124,6 +125,20 @@ export const TargetDesign = styled.div`
   justify-content: space-between;
   position: absolute;
   width: 100%;
+`;
+
+export const TargetName = styled.div`
+  position: absolute;
+  left: -6px;
+  top: 60px;
+  background-color: #fff;
+  width: 80px;
+  font-size: 0.7rem;
+  font-weight: light;
+  color: ${({ theme }) => theme.colorThree};
+  padding: 0.1rem;
+  border-radius: 20px;
+  text-align: center;
 `;
 
 export const TargetRef = styled.div`

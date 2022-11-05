@@ -46,6 +46,13 @@ h1{
 
 }
 
+h3{
+  font-size: 1.5rem;
+  font-weight: bolder;
+  padding-left: 1.5rem;
+  color: ${({ theme }) => theme.colorFive};
+}
+
 @keyframes gradient {
 	0% {
 		color: 0% 50%;

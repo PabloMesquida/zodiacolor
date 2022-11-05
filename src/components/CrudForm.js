@@ -18,6 +18,7 @@ import {
   InputSubmit,
   Messages,
   Alert,
+  TargetName,
 } from "./CrudForm.styles.js";
 import data from "../helpers/signs.json";
 
@@ -183,7 +184,7 @@ const CrudForm = ({ createData }) => {
     if (target === "sun") {
       pos1 = "ss";
     }
-    if (target === "asc") {
+    if (target === "ascendant") {
       pos1 = "aa";
     }
     if (target === "moon") {
@@ -191,40 +192,40 @@ const CrudForm = ({ createData }) => {
     }
     switch (sign) {
       case 0:
-        setColor(color.replace(pos1, "ee"));
-        break;
-      case 1:
-        setColor(color.replace(pos1, "dd"));
-        break;
-      case 2:
         setColor(color.replace(pos1, "cc"));
         break;
-      case 3:
+      case 1:
         setColor(color.replace(pos1, "bb"));
         break;
-      case 4:
+      case 2:
         setColor(color.replace(pos1, "aa"));
         break;
-      case 5:
+      case 3:
         setColor(color.replace(pos1, "99"));
         break;
-      case 6:
+      case 4:
         setColor(color.replace(pos1, "88"));
         break;
-      case 7:
+      case 5:
         setColor(color.replace(pos1, "77"));
         break;
-      case 8:
+      case 6:
         setColor(color.replace(pos1, "66"));
         break;
-      case 9:
+      case 7:
         setColor(color.replace(pos1, "55"));
         break;
-      case 10:
+      case 8:
         setColor(color.replace(pos1, "44"));
         break;
-      case 11:
+      case 9:
         setColor(color.replace(pos1, "33"));
+        break;
+      case 10:
+        setColor(color.replace(pos1, "22"));
+        break;
+      case 11:
+        setColor(color.replace(pos1, "11"));
         break;
       default:
         setColor(color.replace(pos1, "ff"));
@@ -257,6 +258,7 @@ const CrudForm = ({ createData }) => {
                 {message && !form.sun && form.sun !== 0 && (
                   <Alert sec="target">!</Alert>
                 )}
+                <TargetName>Sun</TargetName>
               </TargetCont>
               <TargetCont>
                 <TargetDiv
@@ -267,6 +269,7 @@ const CrudForm = ({ createData }) => {
                 {message && !form.ascendant && form.ascendant !== 0 && (
                   <Alert sec="target">!</Alert>
                 )}
+                <TargetName>Ascendant</TargetName>
               </TargetCont>
               <TargetCont>
                 <TargetDiv
@@ -277,6 +280,7 @@ const CrudForm = ({ createData }) => {
                 {message && !form.moon && form.moon !== 0 && (
                   <Alert sec="target">!</Alert>
                 )}
+                <TargetName>Moon</TargetName>
               </TargetCont>
             </TargetDesign>
             <TargetRef>
