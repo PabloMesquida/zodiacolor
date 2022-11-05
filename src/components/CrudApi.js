@@ -4,7 +4,7 @@ import { helpHttp } from "../helpers/helpHttp";
 import CrudForm from "./CrudForm";
 import CrudTable from "./CrudTable";
 import Message from "./Message";
-import { SectionContainer, InfoContainer, Credits } from "./CrudApi.styles.js";
+import { SectionContainer, InfoContainer } from "./CrudApi.styles.js";
 
 const CrudApi = () => {
   const [db, setDb] = useState(null);

@@ -34,7 +34,7 @@ export const YourColor = styled.div`
   height: 78px;
   width: 78px;
   border-radius: 50px;
-  background-color: red;
+  background-color: ${(props) => props.color};
 `;
 
 export const LatestColors = styled.div`

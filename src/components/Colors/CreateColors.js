@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import * as THREE from "three";
-import { useSphere, Debug } from "@react-three/cannon";
+import { useSphere } from "@react-three/cannon";
 
 const tempColor = new THREE.Color();
 

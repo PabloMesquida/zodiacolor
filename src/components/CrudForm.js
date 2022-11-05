@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useSprings, config } from "react-spring";
+import { useSprings } from "react-spring";
 import { useDrag } from "@use-gesture/react";
 import {
   InputsContainer,
