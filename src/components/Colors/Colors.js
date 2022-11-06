@@ -10,7 +10,7 @@ const Colors = ({ data }) => {
   return (
     <Canvas
       style={{
-        height: "342px",
+        height: "336px",
         width: "370px",
         position: "relative",
         left: "-2rem",
