@@ -301,7 +301,7 @@ const CrudForm = ({ createData }) => {
                 img={`signs/imgs/${data.signs[i].img}`}
                 key={data.signs[i].id}
                 {...bind(i)}
-                style={{ x, y, display: i > 11 ? "none" : "inline" }}
+                style={{ x, y }}
                 id={i}
                 ref={(ref) => {
                   refArray.current[i] = ref;

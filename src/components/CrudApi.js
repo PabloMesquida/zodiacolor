@@ -5,6 +5,7 @@ import CrudForm from "./CrudForm";
 import CrudTable from "./CrudTable";
 import Message from "./Message";
 import { SectionContainer, InfoContainer } from "./CrudApi.styles.js";
+import Loader from "./Loader.js";
 
 const CrudApi = () => {
   const [db, setDb] = useState(null);
@@ -58,8 +59,9 @@ const CrudApi = () => {
   return (
     <SectionContainer>
       <InfoContainer style={props}>
+        {loading && <Loader />}
         <CrudForm createData={createData} />
-        {loading && <div>Loading.</div>}
+
         {error && (
           <Message
             msg={`Error ${error.status}: ${error.statusText}`}

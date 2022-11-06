@@ -22,7 +22,7 @@ const CreateColors = ({ data }) => {
   }));
 
   return (
-    <instancedMesh ref={ref} args={[null, null, 14]}>
+    <instancedMesh ref={ref} args={[null, null, 10]}>
       <sphereGeometry args={[1, 32, 32]}>
         <instancedBufferAttribute
           attach="attributes-color"
