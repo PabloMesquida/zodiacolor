@@ -10,7 +10,7 @@ import Loader from "./Loader.js";
 const CrudApi = () => {
   const [db, setDb] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [change, setChange] = useState(false);
 
   let api = helpHttp();
@@ -34,7 +34,9 @@ const CrudApi = () => {
           setError(res);
         }
       });
+
     setLoading(false);
+    console.log(loading);
   }, [url]);
 
   const createData = (data) => {
@@ -47,15 +49,17 @@ const CrudApi = () => {
     };
 
     api.post(url, options).then((res) => {
+      setLoading(true);
       if (!res.err) {
         setDb([...db, res]);
         setChange(true);
       } else {
         setError(res);
       }
+      setLoading(false);
     });
   };
-
+  console.log(loading);
   return (
     <SectionContainer>
       <InfoContainer style={props}>
