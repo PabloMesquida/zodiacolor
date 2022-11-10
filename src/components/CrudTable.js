@@ -8,7 +8,7 @@ import {
 } from "./CrudTable.styles.js";
 
 const CrudTable = ({ data }) => {
-  console.log(data[data.length - 1].color);
+  // console.log(data[data.length - 1].color);
   return (
     <TableContainer>
       <LatestColors>Latest</LatestColors>
